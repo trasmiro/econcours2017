@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <h:form style="width: 70%;">
+            <p:messages />
+            <h:panelGrid columns="2">
+                <p:outputLabel value="Libellé"/>
+                <p:inputText value="#{themeBean.theme.libelleTheme}"/>
+            </h:panelGrid><br/>
+            <h:panelGrid columns="2">
+                <p:outputLabel value="Description"/>
+                <p:inputTextarea value="#{themeBean.theme.descriptionTheme}" rows="5" />
+            </h:panelGrid><br/>
+            <h:panelGrid columns="3">
+                <p:commandButton value="#{btns.annuler}" action="#{themeBean.annuler()}" ajax="false" />
+                <p:commandButton value="#{btns.enregistrer}"  action="#{themeBean.enregistrer()}" ajax="false" />
+                <p:commandButton value="#{btns.fermer}"  action="#{themeBean.fermer()}" ajax="false" />
+            </h:panelGrid>
+
+        </h:form>    
+
+        <h:outputText value="Liste des THEME" styleClass="titre_table"/>
+        <p:dataTable value="#{themeBean.listeThemes}" var="theme" style="font-size: 9pt;" rowIndexVar="indexVar">
+            <p:column headerText="Libellé">
+                #{theme.libelleTheme}
+            </p:column>
+            <p:column headerText="Description">
+                #{theme.descriptionTheme}
+            </p:column>  
+
+            <p:column style="width: 5%;" >
+                <h:form>
+                    <h:commandLink>
+                        <f:setPropertyActionListener target="#{themeBean.theme}" value="#{theme}"/>
+                        <h:graphicImage library="images" name="edit.gif"/>
+                    </h:commandLink>
+                    <p:commandLink oncomplete="dlg_supr.show();">
+                        <f:setPropertyActionListener target="#{themeBean.index}" value="#{indexVar}"/>
+                        <h:graphicImage library="images" name="delete.gif"/>
+                    </p:commandLink>
+                </h:form>
+            </p:column>
+
+        </p:dataTable>
+        <br/>
+
+        <p:dataTable value="#{prestationBean.listePrestation}" var="prestation" style="font-size: 9pt;" rowIndexVar="indexVa">
+            <p:column >
+
+            </p:column>
+            <p:column >
+
+            </p:column>
+        </p:dataTable>
+    </h:body>
+</html>
+
